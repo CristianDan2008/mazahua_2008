@@ -30,11 +30,11 @@
     <!-- Grid de Plantas -->
     <section>
         <h2 style="text-align: center; margin-bottom: 40px; color: #1F4E2F;">🌸 Catálogo Completo</h2>
-        <div class="row g-4">
+        <div class="row g-4" id="plantas-grid">
             {% for planta in plantas %}
             <!-- Tarjeta de Planta - Botón para abrir modal -->
             <div class="col-md-6 col-lg-4">
-                <div class="planta-card-mini" onclick="abrirModal({{ forloop.counter0 }})">
+                <div class="planta-card-mini" data-planta-id="{{ forloop.counter0 }}" onclick="abrirModalPorId(this)">
                     <div class="planta-header-mini">
                         <h4 class="planta-nombre-mini">{{ planta.nombre }}</h4>
                         <p class="planta-cientifico-mini">{{ planta.cientifico }}</p>
@@ -44,10 +44,10 @@
             </div>
 
             <!-- Modal Flotante -->
-            <div id="modal-{{ forloop.counter0 }}" class="modal-flotante">
+            <div id="modal-{{ forloop.counter0 }}" class="modal-flotante" data-modal-id="{{ forloop.counter0 }}">
                 <div class="modal-contenido">
                     <!-- Botón cerrar -->
-                    <button class="modal-cerrar" onclick="cerrarModal({{ forloop.counter0 }})">&times;</button>
+                    <button class="modal-cerrar" data-close-id="{{ forloop.counter0 }}" onclick="cerrarModalPorId(this)">&times;</button>
 
                     <!-- Encabezado con nombre -->
                     <div class="planta-header">
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <!-- Fondo oscuro para cerrar modal -->
-                <div class="modal-fondo" onclick="cerrarModal({{ forloop.counter0 }})"></div>
+                <div class="modal-fondo" data-fondo-id="{{ forloop.counter0 }}" onclick="cerrarModalPorId(this)"></div>
             </div>
             {% endfor %}
         </div>
@@ -88,7 +88,7 @@
 
     <!-- Advertencia importante al final -->
     <section class="mb-5 mt-5">
-        <div class="alert" style="background: linear-gradient(135deg, rgba(61, 127, 48, 0.2), rgba(31, 78, 47, 0.15)); border: 3px solid #1F4E2F; border-radius: 15px; padding: 20px;">
+        <div class="alert" style="background: linear-gradient(135deg, rgba(61, 127, 48, 0.2), rgba(31, 78, 47, 0.15)); border-radius: 15px; padding: 20px;">
             <h5 style="color: #1F4E2F; font-weight: bold; margin-bottom: 15px;">
                 ⚠️ Importante - Consulta Profesional
             </h5>
@@ -113,7 +113,6 @@
     /* ===== TARJETAS MINI ===== */
     .planta-card-mini {
         background: white;
-        border: 3px solid #3D7F30;
         border-radius: 12px;
         padding: 20px;
         cursor: pointer;
@@ -123,17 +122,23 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        user-select: none;
+        -webkit-user-select: none;
     }
 
     .planta-card-mini:hover {
         transform: translateY(-8px) scale(1.02);
         box-shadow: 0 12px 30px rgba(31, 78, 47, 0.3);
-        border-color: #7CB342;
         background: linear-gradient(135deg, rgba(124, 179, 66, 0.05), rgba(61, 127, 48, 0.05));
+    }
+
+    .planta-card-mini:active {
+        transform: translateY(-4px) scale(0.98);
     }
 
     .planta-header-mini {
         text-align: center;
+        pointer-events: none;
     }
 
     .planta-nombre-mini {
@@ -156,6 +161,7 @@
         font-size: 0.8em;
         color: #7CB342;
         font-weight: 500;
+        pointer-events: none;
     }
 
     /* ===== MODAL FLOTANTE ===== */
@@ -233,8 +239,7 @@
         position: relative;
         animation: slideIn 0.3s ease;
         border: 3px solid #3D7F30;
-    }
-
+    
     .modal-cerrar {
         position: absolute;
         top: 15px;
@@ -281,9 +286,7 @@
         margin: 12px;
         background: linear-gradient(135deg, rgba(31, 78, 47, 0.08), transparent);
         border-left: 4px solid #7CB342;
-        border-radius: 8px;
-        border-bottom: 1px dashed #3D7F30;
-    }
+        border-radius: 8px
 
     .apartado-box:last-of-type {
         margin-bottom: 15px;
@@ -315,7 +318,36 @@
 </style>
 
 <script>
-    // Funciones para abrir y cerrar modales
+    // Funciones mejoradas para abrir y cerrar modales usando data-attributes
+    
+    function abrirModalPorId(elemento) {
+        const plantaId = elemento.getAttribute('data-planta-id');
+        if (!plantaId) {
+            console.error('No se encontró el ID de la planta');
+            return;
+        }
+        const modal = document.getElementById(`modal-${plantaId}`);
+        if (modal) {
+            modal.classList.add('activo');
+            document.body.style.overflow = 'hidden';
+            console.log(`Modal ${plantaId} abierto`);
+        } else {
+            console.error(`No se encontró el modal con ID: modal-${plantaId}`);
+        }
+    }
+
+    function cerrarModalPorId(elemento) {
+        // Encontrar el modal más cercano (parent o ancestor)
+        let modal = elemento.closest('.modal-flotante');
+        if (modal) {
+            const modalId = modal.getAttribute('data-modal-id');
+            modal.classList.remove('activo');
+            document.body.style.overflow = 'auto';
+            console.log(`Modal ${modalId} cerrado`);
+        }
+    }
+
+    // Funciones antiguas para compatibilidad
     function abrirModal(indice) {
         const modal = document.getElementById(`modal-${indice}`);
         if (modal) {
@@ -332,23 +364,32 @@
         }
     }
 
-    // Cerrar modal con tecla Escape
+    // Cerrar modal con tecla Escape - mejorado
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             const modalesActivos = document.querySelectorAll('.modal-flotante.activo');
             modalesActivos.forEach((modal) => {
-                const indice = modal.id.split('-')[1];
-                cerrarModal(indice);
+                modal.classList.remove('activo');
             });
+            document.body.style.overflow = 'auto';
         }
     });
 
-    // Prevenir que el scroll del modal cierre el modal
+    // Delegación de eventos para clicks en modales
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('modal-flotante')) {
-            // Cerrar solo si se hace clic en el fondo, no en el contenido
+        // Si se hace clic en el fondo (modal-fondo), cerrar el modal
+        if (e.target.classList.contains('modal-fondo')) {
+            const modal = e.target.closest('.modal-flotante');
+            if (modal) {
+                modal.classList.remove('activo');
+                document.body.style.overflow = 'auto';
+            }
         }
     });
+
+    // Log para debug
+    console.log('Scripts de modal cargados correctamente');
+    console.log(`Total de modales en la página: ${document.querySelectorAll('.modal-flotante').length}`);
 </script>
 
 {% endblock %}
