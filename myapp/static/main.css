@@ -1,0 +1,434 @@
+﻿/**
+ * ============================================================
+ * MAIN.CSS - DISEÑO MAZAHUA YO CHILL
+ * ============================================================
+ * Paleta de colores tradicionales mazahuas con vibrantes tonos
+ */
+
+/* Variables de colores verdes - Naturaleza y plantas */
+:root {
+    --plantas-verde-oscuro: #1F4E2F;   /* Verde profundo */
+    --plantas-verde-medio: #3D7F30;    /* Verde bosque */
+    --plantas-verde-claro: #7CB342;    /* Verde hoja */
+    --plantas-marfil: #FFFACD;         /* Marfil claro */
+}
+
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: transparent;
+    color: var(--plantas-verde-oscuro);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: var(--plantas-verde-oscuro);
+}
+
+a:hover {
+    color: var(--plantas-verde-claro);
+    transform: scale(1.05);
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1rem;
+    color: var(--plantas-verde-oscuro);
+}
+
+/* Títulos */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: var(--plantas-verde-oscuro);
+    text-shadow: 2px 2px 4px rgba(61, 127, 48, 0.2);
+    animation: slideInDown 0.6s ease-out;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--plantas-verde-medio);
+    animation: slideInDown 0.8s ease-out, glowEffect 3s ease-in-out infinite;
+}
+
+h2 {
+    font-size: 2rem;
+    border-bottom: 3px dashed var(--plantas-verde-claro);
+    padding-bottom: 10px;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--plantas-verde-claro), transparent);
+    animation: slideInRight 0.8s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes glowEffect {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(124, 179, 66, 0.4));
+    }
+    50% {
+        filter: drop-shadow(0 0 15px rgba(124, 179, 66, 0.7));
+    }
+}
+
+/* Utilidades */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Padding y Margins */
+.mt-lg {
+    margin-top: 3rem !important;
+}
+
+.mb-lg {
+    margin-bottom: 3rem !important;
+}
+
+.p-lg {
+    padding: 3rem;
+}
+
+/* Patrones decorativos mazahuas */
+.mazahua-border {
+    border-top: 4px solid var(--plantas-verde-claro);
+    border-bottom: 4px solid var(--plantas-verde-medio);
+    border-left: 4px solid var(--plantas-verde-claro);
+    border-right: 4px solid var(--plantas-verde-oscuro);
+    padding: 20px;
+    background: linear-gradient(45deg, rgba(61, 127, 48, 0.05), rgba(124, 179, 66, 0.05));
+    animation: fadeIn 0.6s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.mazahua-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--plantas-verde-claro), transparent);
+    animation: shimmerLine 2s infinite;
+}
+
+@keyframes shimmerLine {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.mazahua-card {
+    border: 3px solid var(--plantas-verde-medio);
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 8px 20px rgba(31, 78, 47, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: zoomIn 0.5s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.mazahua-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--plantas-verde-oscuro), var(--plantas-verde-medio), var(--plantas-verde-claro), var(--plantas-verde-medio));
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.mazahua-card:hover {
+    transform: translateY(-12px) rotate(-1deg) scale(1.02);
+    box-shadow: 0 15px 40px rgba(31, 78, 47, 0.5);
+    filter: drop-shadow(0 0 15px rgba(124, 179, 66, 0.5));
+    border-color: var(--plantas-verde-claro);
+}
+
+/* Botones mazahuas */
+.btn-mazahua {
+    background: linear-gradient(135deg, var(--plantas-verde-medio), var(--plantas-verde-claro));
+    border: 2px solid var(--plantas-verde-oscuro);
+    color: white;
+    font-weight: bold;
+    padding: 12px 24px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(31, 78, 47, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease;
+}
+
+.btn-mazahua::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: 0;
+}
+
+.btn-mazahua:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-mazahua:hover {
+    background: linear-gradient(135deg, var(--plantas-verde-oscuro), var(--plantas-verde-medio));
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(31, 78, 47, 0.6);
+    color: white;
+    filter: drop-shadow(0 0 10px rgba(124, 179, 66, 0.5));
+}
+
+.btn-mazahua:active {
+    transform: scale(0.95);
+}
+
+/* Badges mazahuas */
+.badge-mazahua {
+    background: linear-gradient(135deg, var(--plantas-verde-claro), var(--plantas-verde-medio));
+    color: white;
+    border: 2px solid var(--plantas-verde-oscuro);
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    animation: popIn 0.4s ease;
+    box-shadow: 0 3px 10px rgba(31, 78, 47, 0.3);
+    transition: all 0.3s ease;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.badge-mazahua:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 6px 20px rgba(31, 78, 47, 0.5);
+    filter: drop-shadow(0 0 8px rgba(124, 179, 66, 0.6));
+}
+
+/* Animaciones mazahuas */
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+    }
+    to { 
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-mazahua {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(227, 28, 35, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(227, 28, 35, 0);
+    }
+}
+
+@keyframes rotateInCenter {
+    0% {
+        opacity: 0;
+        transform: rotate(-180deg) scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease-out;
+}
+
+.pulse-mazahua {
+    animation: pulse-mazahua 2s infinite;
+}
+
+.rotate-in {
+    animation: rotateInCenter 0.6s ease-out;
+}
+
+.bounce-in {
+    animation: bounceIn 0.8s ease-out;
+}
+
+/* Accesibilidad */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visible */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--plantas-verde-claro);
+    outline-offset: 2px;
+}
+
+/* Media queries responsivas */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 8px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+}
+
+/* Scroll behavior */
+html {
+    scroll-padding-top: 100px;
+}

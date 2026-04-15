@@ -1,0 +1,248 @@
+﻿{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Yo Chill - Plantas Medicinales Mazahuas{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section Mazahua -->
+<div class="hero-mazahua">
+    <div class="container">
+        <h1 class="hero-Title">
+            🌿 Yo Chill 🌿
+        </h1>
+        <p class="hero-subtitle">La Sabiduría Medicinal de los Pueblos Mazahuas</p>
+        <p style="font-size: 1.1rem; margin-top: 20px;">Descubre las plantas sagradas que dan vida y sanación</p>
+    </div>
+</div>
+
+<div class="container mt-5 mb-5">
+    <!-- Introducción con decoración -->
+    <section class="mb-5 mazahua-border">
+        <h2>🌱 ¿Quiénes Somos?</h2>
+        <p class="fs-5">
+            <strong>Yo Chill</strong> es una plataforma dedicada a honrar y compartir la sabiduría ancestral de las plantas medicinales. 
+            Celebramos el conocimiento tradicional mazahua sobre la medicina natural y sus propiedades curativas 
+            que han sido utilizadas durante generaciones para sanar cuerpo y espíritu.
+        </p>
+    </section>
+
+    <!-- Plantas Destacadas con estilo mazahua -->
+    <section class="mb-5">
+        <h2>🌸 Plantas Medicinales Sagradas</h2>
+        <p style="text-align: center; color: #3D7F30; font-size: 1.1em; margin-bottom: 30px; font-weight: 500;">Haz clic en cualquier planta para descubrir toda la información completa</p>
+        <div class="row g-4">
+            
+            <!-- Manzanilla - Verde Oscuro -->
+            <div class="col-md-6 col-lg-4" style="animation: slideUp 0.6s ease-out 0.1s both;">
+                <a href="{% url 'plantas-completas' %}" style="text-decoration: none;">
+                    <div class="mazahua-card" style="cursor: pointer; height: 100%;">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-flower-tulip" style="font-size: 2.5em; color: #1F4E2F; margin-right: 10px;"></i>
+                                <h5 class="card-title mb-0" style="color: #1F4E2F;">Manzanilla</h5>
+                            </div>
+                            <p class="card-text">
+                                La manzanilla es sagrada para calmar la mente y el espíritu. 
+                                Ideal para reducir ansiedad, estrés y mejorar el buen dormir.
+                            </p>
+                            <div>
+                                <span class="badge-mazahua me-2">🧘 Relajante</span>
+                                <span class="badge-mazahua">💚 Alma</span>
+                            </div>
+                            <button class="btn btn-mazahua" style="width: 100%; margin-top: 15px; font-size: 0.95em;">
+                                Ver Detalles →
+                            </button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Jengibre - Verde Medio -->
+            <div class="col-md-6 col-lg-4" style="animation: slideUp 0.6s ease-out 0.2s both;">
+                <a href="{% url 'plantas-completas' %}" style="text-decoration: none;">
+                    <div class="mazahua-card" style="cursor: pointer; height: 100%;">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-fire" style="font-size: 2.5em; color: #3D7F30; margin-right: 10px;"></i>
+                                <h5 class="card-title mb-0" style="color: #1F4E2F;">Jengibre</h5>
+                            </div>
+                            <p class="card-text">
+                                El jengibre con fuego ancestral trae energía y digestión. 
+                                Alivia dolores y fortifica el cuerpo desde adentro.
+                            </p>
+                            <div>
+                                <span class="badge-mazahua me-2">🔥 Energía</span>
+                                <span class="badge-mazahua">💪 Fuerza</span>
+                            </div>
+                            <button class="btn btn-mazahua" style="width: 100%; margin-top: 15px; font-size: 0.95em;">
+                                Ver Detalles →
+                            </button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Menta - Verde Claro -->
+            <div class="col-md-6 col-lg-4" style="animation: slideUp 0.6s ease-out 0.3s both;">
+                <a href="{% url 'plantas-completas' %}" style="text-decoration: none;">
+                    <div class="mazahua-card" style="cursor: pointer; height: 100%;">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-leaf" style="font-size: 2.5em; color: #7CB342; margin-right: 10px;"></i>
+                                <h5 class="card-title mb-0" style="color: #1F4E2F;">Menta</h5>
+                            </div>
+                            <p class="card-text">
+                                La menta refresca el alma y clarifica la mente. 
+                                Excelente para la digestión y la respiración clara.
+                            </p>
+                            <div>
+                                <span class="badge-mazahua me-2">❄️ Fresca</span>
+                                <span class="badge-mazahua">🌬️ Claridad</span>
+                            </div>
+                            <button class="btn btn-mazahua" style="width: 100%; margin-top: 15px; font-size: 0.95em;">
+                                Ver Detalles →
+                            </button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Aloe Vera - Verde Oscuro -->
+            <div class="col-md-6 col-lg-4" style="animation: slideUp 0.6s ease-out 0.4s both;">
+                <a href="{% url 'plantas-completas' %}" style="text-decoration: none;">
+                    <div class="mazahua-card" style="cursor: pointer; height: 100%;">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-plant" style="font-size: 2.5em; color: #1F4E2F; margin-right: 10px;"></i>
+                                <h5 class="card-title mb-0" style="color: #1F4E2F;">Aloe Vera</h5>
+                            </div>
+                            <p class="card-text">
+                                El aloe es un regalo de la naturaleza para sanar heridas. 
+                                Cicatriza, calma y regenera la piel con su poder divino.
+                            </p>
+                            <div>
+                                <span class="badge-mazahua me-2">✨ Sanación</span>
+                                <span class="badge-mazahua">🌟 Regenera</span>
+                            </div>
+                            <button class="btn btn-mazahua" style="width: 100%; margin-top: 15px; font-size: 0.95em;">
+                                Ver Detalles →
+                            </button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Cúrcuma - Verde Medio -->
+            <div class="col-md-6 col-lg-4" style="animation: slideUp 0.6s ease-out 0.5s both;">
+                <a href="{% url 'plantas-completas' %}" style="text-decoration: none;">
+                    <div class="mazahua-card" style="cursor: pointer; height: 100%;">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-spa" style="font-size: 2.5em; color: #3D7F30; margin-right: 10px;"></i>
+                                <h5 class="card-title mb-0" style="color: #1F4E2F;">Cúrcuma</h5>
+                            </div>
+                            <p class="card-text">
+                                La cúrcuma dorada es antiinflamatoria ancestral. 
+                                Protege articulaciones y mente con su poder ancestral.
+                            </p>
+                            <div>
+                                <span class="badge-mazahua me-2">⚡ Fuego</span>
+                                <span class="badge-mazahua">🛡️ Protección</span>
+                            </div>
+                            <button class="btn btn-mazahua" style="width: 100%; margin-top: 15px; font-size: 0.95em;">
+                                Ver Detalles →
+                            </button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Lavanda - Verde Claro -->
+            <div class="col-md-6 col-lg-4" style="animation: slideUp 0.6s ease-out 0.6s both;">
+                <a href="{% url 'plantas-completas' %}" style="text-decoration: none;">
+                    <div class="mazahua-card" style="cursor: pointer; height: 100%;">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-fan" style="font-size: 2.5em; color: #7CB342; margin-right: 10px;"></i>
+                                <h5 class="card-title mb-0" style="color: #1F4E2F;">Lavanda</h5>
+                            </div>
+                            <p class="card-text">
+                                La lavanda aromática trae paz y serenidad al hogar. 
+                                Relaja el cuerpo y armoniza el espíritu con su fragancia mágica.
+                            </p>
+                            <div>
+                                <span class="badge-mazahua me-2">🌸 Paz</span>
+                                <span class="badge-mazahua">🕊️ Armonía</span>
+                            </div>
+                            <button class="btn btn-mazahua" style="width: 100%; margin-top: 15px; font-size: 0.95em;">
+                                Ver Detalles →
+                            </button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Beneficios destacados -->
+    <section class="mb-5 mazahua-border" style="background: linear-gradient(135deg, rgba(61, 127, 48, 0.1), rgba(31, 78, 47, 0.05)); margin-top: 40px;">
+        <h2>💫 Beneficios de la Medicina Tradicional</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="d-flex">
+                    <div style="font-size: 2.5em; margin-right: 15px;">🌿</div>
+                    <div>
+                        <h5 style="color: #1F4E2F; font-weight: bold;">Sabiduría Ancestral</h5>
+                        <p>Las plantas medicinales ofrecen la sabiduría acumulada de siglos de conocimiento tradicional.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex">
+                    <div style="font-size: 2.5em; margin-right: 15px;">💚</div>
+                    <div>
+                        <h5 style="color: #1F4E2F; font-weight: bold;">Naturaleza Pura</h5>
+                        <p>Sin químicos sintéticos, solo la bendición de la tierra y sus dones naturales.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex">
+                    <div style="font-size: 2.5em; margin-right: 15px;">🌍</div>
+                    <div>
+                        <h5 style="color: #1F4E2F; font-weight: bold;">Accesibles</h5>
+                        <p>Muchas plantas crecen en nuestros jardines y mercados locales, cercanas y asequibles.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="d-flex">
+                    <div style="font-size: 2.5em; margin-right: 15px;">🌳</div>
+                    <div>
+                        <h5 style="color: #1F4E2F; font-weight: bold;">Sostenibles</h5>
+                        <p>Cultivadas responsablemente, honrando la tierra que nos da vida y salud.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advertencia importante -->
+    <section class="mb-5">
+        <div class="alert" style="background: linear-gradient(135deg, rgba(61, 127, 48, 0.2), rgba(31, 78, 47, 0.15)); border: 3px solid #1F4E2F; border-radius: 15px; padding: 20px;">
+            <h5 style="color: #1F4E2F; font-weight: bold; margin-bottom: 15px;">
+                ⚠️ Importante - Consulta con Expertos
+            </h5>
+            <p style="color: #1F4E2F; font-weight: 500; margin-bottom: 0;">
+                Aunque las plantas medicinales son naturales y sagradas, siempre consulta con un profesional de salud 
+                antes de usarlas, especialmente si tomas medicamentos o tienes condiciones médicas preexistentes. 
+                La información aquí es para fines educativos y para honrar la sabiduría tradicional.
+            </p>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}
