@@ -117,7 +117,7 @@ Yo Chill{% endblock %} {% block content %}
   }
 
   .btn-link {
-    display: inline-block;
+    display: block;
     background: #1f4e2f;
     color: white;
     padding: 10px 20px;
@@ -127,12 +127,15 @@ Yo Chill{% endblock %} {% block content %}
     transition: all 0.3s ease;
     font-size: 0.95em;
     margin-top: auto;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
   }
 
   .btn-link:hover {
     background: #3d7f30;
     color: white;
-    transform: translateX(5px);
+    transform: scale(1.05);
   }
 
   /* ===== ALERTA ===== */
