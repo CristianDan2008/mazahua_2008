@@ -6,10 +6,10 @@
 {% block content %}
 
 <!-- Hero Section -->
-<div style="background: linear-gradient(135deg, #1f4e2f 0%, #3d7f30 100%); padding: 80px 20px; margin-bottom: 50px; color: white; text-align: center;">
+<div style="background: linear-gradient(135deg, #1F4E2F 0%, #3D7F30 50%, #7CB342 100%); padding: 80px 20px; margin-bottom: 50px; color: white; text-align: center; border-radius: 0 0 30px 30px; box-shadow: 0 10px 30px rgba(31, 78, 47, 0.3);">
   <div class="container">
-    <h1 style="font-size: 3.5em; margin: 0; font-weight: bold; letter-spacing: 1px;">🌿 Nuestras Plantas Medicinales</h1>
-    <p style="font-size: 1.4em; margin: 20px 0 0 0; opacity: 1; font-weight: 500;">Sabiduría ancestral de la medicina tradicional Mazahua</p>
+    <h1 style="font-size: 3.5em; margin: 0; font-weight: bold; letter-spacing: 1px; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);">🌿 Nuestras Plantas Medicinales</h1>
+    <p style="font-size: 1.4em; margin: 20px 0 0 0; opacity: 1; font-weight: 500; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">Sabiduría ancestral de la medicina tradicional Mazahua</p>
   </div>
 </div>
 
@@ -28,16 +28,16 @@
     <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 25px rgba(31, 78, 47, 0.15); transition: all 0.3s ease; cursor: pointer;" 
          onmouseover="this.style.boxShadow='0 15px 50px rgba(31, 78, 47, 0.25)'; this.style.transform='translateY(-12px)';"
          onmouseout="this.style.boxShadow='0 8px 25px rgba(31, 78, 47, 0.15)'; this.style.transform='translateY(0)';">
-      <div style="background: linear-gradient(135deg, #1f4e2f 0%, #3d7f30 100%); padding: 25px; color: white; min-height: 100px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="background: linear-gradient(135deg, {% cycle '#1F4E2F' '#3D7F30' '#7CB342' %} 0%, {% cycle '#3D7F30' '#7CB342' '#1F4E2F' %} 100%); padding: 25px; color: white; min-height: 100px; display: flex; flex-direction: column; justify-content: center;">
         <h3 style="margin: 0 0 8px 0; font-size: 1.7em; font-weight: bold; line-height: 1.3;">{{ planta.nombre }}</h3>
         <p style="margin: 0; font-size: 0.95em; font-style: italic; opacity: 0.95; font-weight: 500;">{{ planta.cientifico }}</p>
       </div>
       <div style="padding: 25px;">
         <p style="color: #333; font-size: 1em; line-height: 1.7; margin: 0 0 25px 0; font-weight: 500;">{{ planta.definicion|truncatewords:22 }}</p>
         <button onclick="location.href='/plantas/{{ forloop.counter0 }}/'" 
-                style="width: 100%; background: #1f4e2f; color: white; border: none; padding: 13px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1em; transition: all 0.3s ease;"
-                onmouseover="this.style.background='#3d7f30'; this.style.transform='scale(1.02)';"
-                onmouseout="this.style.background='#1f4e2f'; this.style.transform='scale(1)';">
+                style="width: 100%; background: linear-gradient(90deg, #1F4E2F 0%, #3D7F30 100%); color: white; border: none; padding: 13px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 1em; transition: all 0.3s ease;"
+                onmouseover="this.style.background='linear-gradient(90deg, #3D7F30 0%, #7CB342 100%)'; this.style.transform='scale(1.02)';"
+                onmouseout="this.style.background='linear-gradient(90deg, #1F4E2F 0%, #3D7F30 100%)'; this.style.transform='scale(1)';">
           ➜ Ver Detalles
         </button>
       </div>
@@ -58,9 +58,9 @@
 
   <!-- Botón de Retorno -->
   <div style="text-align: center;">
-    <a href="/" style="display: inline-block; background: #1f4e2f; color: white; padding: 18px 50px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(31, 78, 47, 0.3);"
-       onmouseover="this.style.background='#3d7f30'; this.style.transform='scale(1.08)'; this.style.boxShadow='0 10px 25px rgba(31, 78, 47, 0.4)';"
-       onmouseout="this.style.background='#1f4e2f'; this.style.transform='scale(1)'; this.style.boxShadow='0 5px 15px rgba(31, 78, 47, 0.3)';">
+    <a href="/" style="display: inline-block; background: linear-gradient(90deg, #1f4e2f 0%, #3d7f30 50%, #7cb342 100%); color: white; padding: 18px 50px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 1.1em; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(31, 78, 47, 0.3);"
+       onmouseover="this.style.boxShadow='0 10px 25px rgba(31, 78, 47, 0.4)'; this.style.transform='scale(1.08)';"
+       onmouseout="this.style.boxShadow='0 5px 15px rgba(31, 78, 47, 0.3)'; this.style.transform='scale(1)';">
       🏠 Volver al Inicio
     </a>
   </div>
