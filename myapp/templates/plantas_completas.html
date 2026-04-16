@@ -172,14 +172,13 @@
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 1000;
-        animation: fadeIn 0.3s ease;
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
     }
 
     .modal-flotante.activo {
         display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     .modal-flotante.activo::before {
@@ -217,6 +216,29 @@
         }
     }
 
+    @keyframes leafRotate {
+        0% {
+            transform: translate(-50%, -50%) rotate(-30deg);
+        }
+        50% {
+            transform: translate(-50%, -50%) rotate(30deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(-30deg);
+        }
+    }
+
+    @keyframes leafPulse {
+        0%, 100% {
+            opacity: 0.2;
+            font-size: 60rem;
+        }
+        50% {
+            opacity: 0.1;
+            font-size: 65rem;
+        }
+    }
+
     .modal-fondo {
         position: absolute;
         top: 0;
@@ -225,7 +247,7 @@
         height: 100%;
         background: rgba(0, 0, 0, 0.6);
         cursor: pointer;
-        z-index: -1;
+        z-index: 1;
     }
 
     .modal-contenido {
@@ -239,6 +261,7 @@
         position: relative;
         animation: slideIn 0.3s ease;
         border: 3px solid #3D7F30;
+        z-index: 2;
     }
     
     .modal-cerrar {
