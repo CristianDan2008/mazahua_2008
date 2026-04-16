@@ -1,420 +1,374 @@
-﻿{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Plantas Completas - Yo Chill{% endblock %}
-
-{% block content %}
+﻿{% extends 'base.html' %} {% load static %} {% block title %}Plantas Completas -
+Yo Chill{% endblock %} {% block content %}
 
 <!-- Hero Section Plantas Completas -->
 <div class="hero-mazahua">
-    <div class="container">
-        <h1 class="hero-Title">
-            🌱 Enciclopedia de Plantas 🌱
-        </h1>
-        <p class="hero-subtitle">Descubre la sabiduría completa de cada planta sagrada</p>
-        <p style="font-size: 1.1rem; margin-top: 20px;">Información detallada de cada planta medicinal</p>
-    </div>
+  <div class="container">
+    <h1 class="hero-Title">🌱 Enciclopedia de Plantas 🌱</h1>
+    <p class="hero-subtitle">
+      Descubre la sabiduría completa de cada planta sagrada
+    </p>
+    <p style="font-size: 1.1rem; margin-top: 20px">
+      Información detallada de cada planta medicinal
+    </p>
+  </div>
 </div>
 
 <div class="container mt-5 mb-5">
-    <!-- Introducción -->
-    <section class="mb-5 mazahua-border">
-        <h2>🌿 Conocimiento Profundo de Nuestras Plantas</h2>
-        <p class="fs-5">
-            Cada planta medicinal contiene en sus hojas y raíces siglos de sabiduría ancestral. 
-            Aquí encontrarás información completa sobre cada planta: su definición científica, 
-            descripción literaria, ejemplo de uso tradicional e importancia cultural.
-        </p>
-    </section>
+  <!-- Introducción -->
+  <section class="mb-5 mazahua-border">
+    <h2>🌿 Conocimiento Profundo de Nuestras Plantas</h2>
+    <p class="fs-5">
+      Cada planta medicinal contiene en sus hojas y raíces siglos de sabiduría
+      ancestral. Aquí encontrarás información completa sobre cada planta: su
+      definición científica, descripción literaria, ejemplo de uso tradicional e
+      importancia cultural.
+    </p>
+  </section>
 
-    <!-- Grid de Plantas -->
-    <section>
-        <h2 style="text-align: center; margin-bottom: 40px; color: #1F4E2F;">🌸 Catálogo Completo</h2>
-        <div class="row g-4" id="plantas-grid">
-            {% for planta in plantas %}
-            <!-- Tarjeta de Planta - Botón para abrir modal -->
-            <div class="col-md-6 col-lg-4">
-                <div class="planta-card-mini" data-planta-id="{{ forloop.counter0 }}" onclick="abrirModalPorId(this)">
-                    <div class="planta-header-mini">
-                        <h4 class="planta-nombre-mini">{{ planta.nombre }}</h4>
-                        <p class="planta-cientifico-mini">{{ planta.cientifico }}</p>
-                    </div>
-                    <p class="planta-click-hint">Haz clic para ver detalles</p>
-                </div>
-            </div>
-
-            <!-- Modal Flotante -->
-            <div id="modal-{{ forloop.counter0 }}" class="modal-flotante" data-modal-id="{{ forloop.counter0 }}">
-                <div class="modal-contenido">
-                    <!-- Botón cerrar -->
-                    <button class="modal-cerrar" data-close-id="{{ forloop.counter0 }}" onclick="cerrarModalPorId(this)">&times;</button>
-
-                    <!-- Encabezado con nombre -->
-                    <div class="planta-header">
-                        <h3 class="planta-nombre">{{ planta.nombre }}</h3>
-                        <p style="margin: 8px 0 0 0; color: white; font-style: italic; font-size: 0.9em;">{{ planta.cientifico }}</p>
-                    </div>
-
-                    <!-- 1. Definición Científica -->
-                    <div class="apartado-box">
-                        <h6 style="color: #1F4E2F; font-weight: bold; margin-bottom: 10px;">🔬 Definición Científica</h6>
-                        <p class="apartado-texto">{{ planta.definicion }}</p>
-                    </div>
-
-                    <!-- 2. Descripción Literaria -->
-                    <div class="apartado-box">
-                        <h6 style="color: #3D7F30; font-weight: bold; margin-bottom: 10px;">✨ Descripción</h6>
-                        <p class="apartado-texto" style="font-style: italic;">{{ planta.descripcion }}</p>
-                    </div>
-
-                    <!-- 3. Ejemplo de Uso Tradicional -->
-                    <div class="apartado-box">
-                        <h6 style="color: #7CB342; font-weight: bold; margin-bottom: 10px;">🌿 Ejemplo de Uso Tradicional</h6>
-                        <p class="apartado-texto">{{ planta.uso_tradicional }}</p>
-                    </div>
-
-                    <!-- 4. Importancia Cultural -->
-                    <div class="apartado-box">
-                        <h6 style="color: #1F4E2F; font-weight: bold; margin-bottom: 10px;">🏛️ Importancia Cultural</h6>
-                        <p class="apartado-texto">{{ planta.importancia }}</p>
-                    </div>
-                </div>
-                <!-- Fondo oscuro para cerrar modal -->
-                <div class="modal-fondo" data-fondo-id="{{ forloop.counter0 }}" onclick="cerrarModalPorId(this)"></div>
-            </div>
-            {% endfor %}
+  <!-- Grid de Plantas -->
+  <section>
+    <h2 style="text-align: center; margin-bottom: 40px; color: #1f4e2f">
+      🌸 Catálogo Completo
+    </h2>
+    <div class="row g-4" id="plantas-grid">
+      {% for planta in plantas %}
+      <!-- Tarjeta de Planta - Botón para abrir modal -->
+      <div class="col-md-6 col-lg-4">
+        <div class="planta-card-mini">
+          <div class="planta-header-mini">
+            <h4 class="planta-nombre-mini">{{ planta.nombre }}</h4>
+            <p class="planta-cientifico-mini">{{ planta.cientifico }}</p>
+          </div>
+          <button
+            class="btn-detalles"
+            onclick="abrirModalPorId({{ forloop.counter0 }})"
+          >
+            Ver Detalles
+          </button>
         </div>
-    </section>
+      </div>
 
-    <!-- Advertencia importante al final -->
-    <section class="mb-5 mt-5">
-        <div class="alert" style="background: linear-gradient(135deg, rgba(61, 127, 48, 0.2), rgba(31, 78, 47, 0.15)); border-radius: 15px; padding: 20px;">
-            <h5 style="color: #1F4E2F; font-weight: bold; margin-bottom: 15px;">
-                ⚠️ Importante - Consulta Profesional
-            </h5>
-            <p style="color: #1F4E2F; font-weight: 500; margin-bottom: 0;">
-                Esta enciclopedia es una guía informativa para honrar el conocimiento tradicional. 
-                Consulta siempre con un profesional de salud calificado antes de usar estas plantas, 
-                especialmente si tomas medicamentos o tienes condiciones médicas.
+      <!-- Modal Flotante -->
+      <div
+        id="modal-{{ forloop.counter0 }}"
+        class="modal-flotante"
+        data-modal-id="{{ forloop.counter0 }}"
+      >
+        <div class="modal-contenido">
+          <!-- Botón cerrar -->
+          <button
+            class="modal-cerrar"
+            data-close-id="{{ forloop.counter0 }}"
+            onclick="cerrarModalPorId(this)"
+          >
+            &times;
+          </button>
+
+          <!-- Encabezado con nombre -->
+          <div class="planta-header">
+            <h3 class="planta-nombre">{{ planta.nombre }}</h3>
+            <p
+              style="
+                margin: 8px 0 0 0;
+                color: white;
+                font-style: italic;
+                font-size: 0.9em;
+              "
+            >
+              {{ planta.cientifico }}
             </p>
+          </div>
+
+          <!-- 1. Definición Científica -->
+          <div class="apartado-box">
+            <h6 style="color: #1f4e2f; font-weight: bold; margin-bottom: 10px">
+              🔬 Definición Científica
+            </h6>
+            <p class="apartado-texto">{{ planta.definicion }}</p>
+          </div>
+
+          <!-- 2. Descripción Literaria -->
+          <div class="apartado-box">
+            <h6 style="color: #3d7f30; font-weight: bold; margin-bottom: 10px">
+              ✨ Descripción
+            </h6>
+            <p class="apartado-texto" style="font-style: italic">
+              {{ planta.descripcion }}
+            </p>
+          </div>
+
+          <!-- 3. Ejemplo de Uso Tradicional -->
+          <div class="apartado-box">
+            <h6 style="color: #7cb342; font-weight: bold; margin-bottom: 10px">
+              🌿 Ejemplo de Uso Tradicional
+            </h6>
+            <p class="apartado-texto">{{ planta.uso_tradicional }}</p>
+          </div>
+
+          <!-- 4. Importancia Cultural -->
+          <div class="apartado-box">
+            <h6 style="color: #1f4e2f; font-weight: bold; margin-bottom: 10px">
+              🏛️ Importancia Cultural
+            </h6>
+            <p class="apartado-texto">{{ planta.importancia }}</p>
+          </div>
         </div>
-    </section>
+        <!-- Fondo oscuro para cerrar modal -->
+        <div
+          class="modal-fondo"
+          data-fondo-id="{{ forloop.counter0 }}"
+          onclick="cerrarModalPorId(this)"
+        ></div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
 
-    <!-- Botón de retorno -->
-    <section class="text-center mb-5">
-        <a href="{% url 'inicio' %}" class="btn btn-mazahua" style="padding: 15px 40px; font-size: 1.1em;">
-            🏠 Volver al Inicio
-        </a>
-    </section>
+  <!-- Advertencia importante al final -->
+  <section class="mb-5 mt-5">
+    <div
+      class="alert"
+      style="
+        background: linear-gradient(
+          135deg,
+          rgba(61, 127, 48, 0.2),
+          rgba(31, 78, 47, 0.15)
+        );
+        border-radius: 15px;
+        padding: 20px;
+      "
+    >
+      <h5 style="color: #1f4e2f; font-weight: bold; margin-bottom: 15px">
+        ⚠️ Importante - Consulta Profesional
+      </h5>
+      <p style="color: #1f4e2f; font-weight: 500; margin-bottom: 0">
+        Esta enciclopedia es una guía informativa para honrar el conocimiento
+        tradicional. Consulta siempre con un profesional de salud calificado
+        antes de usar estas plantas, especialmente si tomas medicamentos o
+        tienes condiciones médicas.
+      </p>
+    </div>
+  </section>
 
+  <!-- Botón de retorno -->
+  <section class="text-center mb-5">
+    <a
+      href="{% url 'inicio' %}"
+      class="btn btn-mazahua"
+      style="padding: 15px 40px; font-size: 1.1em"
+    >
+      🏠 Volver al Inicio
+    </a>
+  </section>
 </div>
 
 <style>
-    /* ===== TARJETAS MINI ===== */
-    .planta-card-mini {
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(31, 78, 47, 0.15);
-        min-height: 120px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        user-select: none;
-        -webkit-user-select: none;
-    }
+  /* ===== TARJETAS ===== */
+  .planta-card-mini {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(31, 78, 47, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 
-    .planta-card-mini:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 12px 30px rgba(31, 78, 47, 0.3);
-        background: linear-gradient(135deg, rgba(124, 179, 66, 0.05), rgba(61, 127, 48, 0.05));
-    }
+  .planta-card-mini:hover {
+    box-shadow: 0 8px 25px rgba(31, 78, 47, 0.3);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+  }
 
-    .planta-card-mini:active {
-        transform: translateY(-4px) scale(0.98);
-    }
+  .planta-header-mini {
+    text-align: center;
+  }
 
-    .planta-header-mini {
-        text-align: center;
-        pointer-events: none;
-    }
+  .planta-nombre-mini {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #1f4e2f;
+  }
 
-    .planta-nombre-mini {
-        margin: 0 0 8px 0;
-        font-size: 1.3em;
-        font-weight: bold;
-        color: #1F4E2F;
-    }
+  .planta-cientifico-mini {
+    margin: 5px 0 0 0;
+    color: #3d7f30;
+    font-style: italic;
+    font-size: 0.85em;
+  }
 
-    .planta-cientifico-mini {
-        margin: 0;
-        color: #3D7F30;
-        font-style: italic;
-        font-size: 0.85em;
-    }
+  .btn-detalles {
+    background: #1f4e2f;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 
-    .planta-click-hint {
-        margin-top: 10px;
-        text-align: center;
-        font-size: 0.8em;
-        color: #7CB342;
-        font-weight: 500;
-        pointer-events: none;
-    }
+  .btn-detalles:hover {
+    background: #3d7f30;
+    transform: scale(1.05);
+  }
 
-    /* ===== MODAL FLOTANTE ===== */
-    .modal-flotante {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        align-items: center;
-        justify-content: center;
-    }
+  /* ===== MODAL SIMPLE ===== */
+  .modal-flotante {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .modal-flotante.activo {
-        display: flex;
-    }
+  .modal-flotante.activo {
+    display: flex;
+  }
 
-    .modal-flotante.activo::before {
-        content: '🍃';
-        position: fixed;
-        font-size: 60rem;
-        opacity: 0.2;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-30deg);
-        z-index: 1;
-        pointer-events: none;
-        animation: leafRotate 8s ease-in-out infinite, leafPulse 4s ease-in-out infinite;
-        text-shadow: 0 0 100px rgba(31, 78, 47, 0.6);
-        filter: drop-shadow(0 0 80px rgba(31, 78, 47, 0.5));
-    }
+  .modal-contenido {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 95%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    padding: 0;
+  }
 
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
+  .modal-cerrar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #f0f0f0;
+    color: #1f4e2f;
+    border: none;
+    font-size: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: all 0.2s ease;
+  }
 
-    @keyframes slideIn {
-        from {
-            transform: translateY(-50px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
+  .modal-cerrar:hover {
+    background: #1f4e2f;
+    color: white;
+  }
 
-    @keyframes leafRotate {
-        0% {
-            transform: translate(-50%, -50%) rotate(-30deg);
-        }
-        50% {
-            transform: translate(-50%, -50%) rotate(30deg);
-        }
-        100% {
-            transform: translate(-50%, -50%) rotate(-30deg);
-        }
-    }
+  .modal-fondo {
+    display: none;
+  }
 
-    @keyframes leafPulse {
-        0%, 100% {
-            opacity: 0.2;
-            font-size: 60rem;
-        }
-        50% {
-            opacity: 0.1;
-            font-size: 65rem;
-        }
-    }
+  /* ===== CONTENIDO MODAL ===== */
+  .planta-header {
+    background: linear-gradient(135deg, #1f4e2f, #3d7f30);
+    color: white;
+    padding: 30px;
+    border-radius: 15px 15px 0 0;
+  }
 
-    .modal-fondo {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        cursor: pointer;
-        z-index: 1;
-    }
+  .planta-nombre {
+    margin: 0;
+    font-size: 2em;
+    font-weight: bold;
+  }
 
+  .apartado-box {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .apartado-box:last-of-type {
+    border-bottom: none;
+  }
+
+  .apartado-box h6 {
+    color: #1f4e2f;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+
+  .apartado-texto {
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+    font-size: 0.95em;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
     .modal-contenido {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
-        max-width: 600px;
-        width: 90%;
-        max-height: 85vh;
-        overflow-y: auto;
-        position: relative;
-        animation: slideIn 0.3s ease;
-        border: 3px solid #3D7F30;
-        z-index: 2;
-    }
-    
-    .modal-cerrar {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background: #1F4E2F;
-        color: white;
-        border: none;
-        font-size: 28px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
-        z-index: 10;
-    }
-
-    .modal-cerrar:hover {
-        background: #7CB342;
-        transform: rotate(90deg);
-    }
-
-    /* ===== ESTILOS COMUNES ===== */
-    .planta-header {
-        background: linear-gradient(135deg, #1F4E2F 0%, #3D7F30 100%);
-        padding: 20px;
-        color: white;
-        border-bottom: 3px solid #7CB342;
-        margin-top: 30px;
+      width: 100%;
+      max-height: 90vh;
+      margin: 0 10px;
     }
 
     .planta-nombre {
-        margin: 0;
-        font-size: 1.8em;
-        font-weight: bold;
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-size: 1.5em;
     }
 
     .apartado-box {
-        padding: 15px;
-        margin: 12px;
-        background: linear-gradient(135deg, rgba(31, 78, 47, 0.08), transparent);
-        border-left: 4px solid #7CB342;
-        border-radius: 8px;
+      padding: 15px;
     }
-
-    .apartado-box:last-of-type {
-        margin-bottom: 15px;
-    }
-
-    .apartado-texto {
-        margin: 0;
-        line-height: 1.6;
-        color: #1F4E2F;
-        font-size: 0.95em;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-        .modal-contenido {
-            width: 95%;
-            max-height: 90vh;
-        }
-
-        .planta-nombre {
-            font-size: 1.4em;
-        }
-
-        .apartado-box {
-            padding: 12px;
-            margin: 10px;
-        }
-    }
+  }
 </style>
 
 <script>
-    // Funciones mejoradas para abrir y cerrar modales usando data-attributes
-    
-    function abrirModalPorId(elemento) {
-        const plantaId = elemento.getAttribute('data-planta-id');
-        if (!plantaId) {
-            console.error('No se encontró el ID de la planta');
-            return;
-        }
-        const modal = document.getElementById(`modal-${plantaId}`);
-        if (modal) {
-            modal.classList.add('activo');
-            document.body.style.overflow = 'hidden';
-            console.log(`Modal ${plantaId} abierto`);
-        } else {
-            console.error(`No se encontró el modal con ID: modal-${plantaId}`);
-        }
+  function abrirModalPorId(id) {
+    const modal = document.getElementById(`modal-${id}`);
+    if (modal) {
+      modal.classList.add("activo");
+      document.body.style.overflow = "hidden";
+      console.log(`Modal ${id} abierto`);
     }
+  }
 
-    function cerrarModalPorId(elemento) {
-        // Encontrar el modal más cercano (parent o ancestor)
-        let modal = elemento.closest('.modal-flotante');
-        if (modal) {
-            const modalId = modal.getAttribute('data-modal-id');
-            modal.classList.remove('activo');
-            document.body.style.overflow = 'auto';
-            console.log(`Modal ${modalId} cerrado`);
-        }
+  function cerrarModalPorId(elemento) {
+    const modal = elemento.closest(".modal-flotante");
+    if (modal) {
+      modal.classList.remove("activo");
+      document.body.style.overflow = "auto";
+      console.log("Modal cerrado");
     }
+  }
 
-    // Funciones antiguas para compatibilidad
-    function abrirModal(indice) {
-        const modal = document.getElementById(`modal-${indice}`);
-        if (modal) {
-            modal.classList.add('activo');
-            document.body.style.overflow = 'hidden';
-        }
+  // Cerrar modal al hacer clic en el fondo
+  document.addEventListener("click", (e) => {
+    if (e.target.classList.contains("modal-flotante")) {
+      e.target.classList.remove("activo");
+      document.body.style.overflow = "auto";
     }
+  });
 
-    function cerrarModal(indice) {
-        const modal = document.getElementById(`modal-${indice}`);
-        if (modal) {
-            modal.classList.remove('activo');
-            document.body.style.overflow = 'auto';
-        }
+  // Cerrar con tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document
+        .querySelectorAll(".modal-flotante.activo")
+        .forEach((m) => m.classList.remove("activo"));
+      document.body.style.overflow = "auto";
     }
+  });
 
-    // Cerrar modal con tecla Escape - mejorado
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const modalesActivos = document.querySelectorAll('.modal-flotante.activo');
-            modalesActivos.forEach((modal) => {
-                modal.classList.remove('activo');
-            });
-            document.body.style.overflow = 'auto';
-        }
-    });
-
-    // Delegación de eventos para clicks en modales
-    document.addEventListener('click', (e) => {
-        // Si se hace clic en el fondo (modal-fondo), cerrar el modal
-        if (e.target.classList.contains('modal-fondo')) {
-            const modal = e.target.closest('.modal-flotante');
-            if (modal) {
-                modal.classList.remove('activo');
-                document.body.style.overflow = 'auto';
-            }
-        }
-    });
-
-    // Log para debug
-    console.log('Scripts de modal cargados correctamente');
-    console.log(`Total de modales en la página: ${document.querySelectorAll('.modal-flotante').length}`);
+  console.log(
+    `Total de modales: ${document.querySelectorAll(".modal-flotante").length}`,
+  );
 </script>
 
 {% endblock %}
