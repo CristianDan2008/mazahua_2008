@@ -40,12 +40,13 @@ Yo Chill{% endblock %} {% block content %}
             <h4 class="planta-nombre-mini">{{ planta.nombre }}</h4>
             <p class="planta-cientifico-mini">{{ planta.cientifico }}</p>
           </div>
-          <button
+          <a
+            href="{% url 'detalle-planta' id=forloop.counter0 %}"
             class="btn-detalles"
-            onclick="window.location.href='{% url 'detalle-planta' id=forloop.counter0 %}'"
+            role="button"
           >
             Ver Detalles →
-          </button>
+          </a>
         </div>
       </div>
       {% endfor %}
