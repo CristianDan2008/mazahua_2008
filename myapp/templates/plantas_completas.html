@@ -1,161 +1,197 @@
-﻿{% extends 'base.html' %} {% load static %} {% block title %}Plantas Completas -
-Yo Chill{% endblock %} {% block content %}
+﻿{% extends 'base.html' %}
+{% load static %}
 
-<!-- Hero Section Plantas Completas -->
+{% block title %}Plantas Completas - Yo Chill{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
 <div class="hero-mazahua">
   <div class="container">
     <h1 class="hero-Title">🌱 Enciclopedia de Plantas 🌱</h1>
-    <p class="hero-subtitle">
-      Descubre la sabiduría completa de cada planta sagrada
-    </p>
-    <p style="font-size: 1.1rem; margin-top: 20px">
-      Información detallada de cada planta medicinal
-    </p>
+    <p class="hero-subtitle">Descubre la sabiduría completa de cada planta sagrada</p>
   </div>
 </div>
 
-<div class="container mt-5 mb-5">
+<div class="container my-5">
   <!-- Introducción -->
-  <section class="mb-5 mazahua-border">
-    <h2>🌿 Conocimiento Profundo de Nuestras Plantas</h2>
-    <p class="fs-5">
-      Cada planta medicinal contiene en sus hojas y raíces siglos de sabiduría
-      ancestral. Aquí encontrarás información completa sobre cada planta: su
-      definición científica, descripción literaria, ejemplo de uso tradicional e
-      importancia cultural.
+  <section class="mb-5">
+    <h2 class="text-center mb-4">🌿 Conocimiento Profundo de Nuestras Plantas</h2>
+    <p class="text-center fs-5" style="color: #333; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+      Cada planta medicinal contiene en sus hojas y raíces siglos de sabiduría ancestral. 
+      Aquí encontrarás información completa: definición científica, descripción, 
+      usos tradicionales e importancia cultural.
     </p>
   </section>
 
   <!-- Grid de Plantas -->
-  <section>
-    <h2 style="text-align: center; margin-bottom: 40px; color: #1f4e2f">
-      🌸 Catálogo Completo
-    </h2>
-    <div class="row g-4" id="plantas-grid">
+  <section class="mb-5">
+    <h2 class="text-center mb-4" style="color: #1f4e2f;">🌸 Catálogo Completo</h2>
+    <div class="row g-4">
       {% for planta in plantas %}
-      <!-- Tarjeta de Planta -->
-      <div class="col-md-6 col-lg-4">
-        <div class="planta-card-mini">
-          <div class="planta-header-mini">
-            <h4 class="planta-nombre-mini">{{ planta.nombre }}</h4>
-            <p class="planta-cientifico-mini">{{ planta.cientifico }}</p>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card-planta">
+          <div class="card-body">
+            <h5 class="card-title">{{ planta.nombre }}</h5>
+            <p class="card-subtitle">{{ planta.cientifico }}</p>
+            <p class="card-text">{{ planta.definicion|truncatewords:15 }}</p>
+            <a href="/plantas/{{ forloop.counter0 }}/" class="btn-link">
+              Ver Detalles →
+            </a>
           </div>
-          <a
-            href="{% url 'detalle-planta' id=forloop.counter0 %}"
-            class="btn-detalles"
-            role="button"
-          >
-            Ver Detalles →
-          </a>
         </div>
       </div>
       {% endfor %}
     </div>
   </section>
 
-  <!-- Advertencia importante al final -->
-  <section class="mb-5 mt-5">
-    <div
-      class="alert"
-      style="
-        background: linear-gradient(
-          135deg,
-          rgba(61, 127, 48, 0.2),
-          rgba(31, 78, 47, 0.15)
-        );
-        border-radius: 15px;
-        padding: 20px;
-      "
-    >
-      <h5 style="color: #1f4e2f; font-weight: bold; margin-bottom: 15px">
-        ⚠️ Importante - Consulta Profesional
-      </h5>
-      <p style="color: #1f4e2f; font-weight: 500; margin-bottom: 0">
-        Esta enciclopedia es una guía informativa para honrar el conocimiento
-        tradicional. Consulta siempre con un profesional de salud calificado
-        antes de usar estas plantas, especialmente si tomas medicamentos o
-        tienes condiciones médicas.
+  <!-- Advertencia -->
+  <section class="mb-5">
+    <div class="alert-box">
+      <h5>⚠️ Importante - Consulta Profesional</h5>
+      <p>
+        Esta enciclopedia es una guía informativa para honrar el conocimiento tradicional. 
+        Consulta siempre con un profesional de salud calificado antes de usar estas plantas, 
+        especialmente si tomas medicamentos o tienes condiciones médicas.
       </p>
     </div>
   </section>
 
   <!-- Botón de retorno -->
-  <section class="text-center mb-5">
-    <a
-      href="{% url 'inicio' %}"
-      class="btn btn-mazahua"
-      style="padding: 15px 40px; font-size: 1.1em"
-    >
-      🏠 Volver al Inicio
-    </a>
-  </section>
+  <div class="text-center mb-5">
+    <a href="/" class="btn-volver">🏠 Volver al Inicio</a>
+  </div>
 </div>
 
 <style>
-  /* TARJETAS */
-  .planta-card-mini {
+  /* ===== TARJETAS ===== */
+  .card-planta {
     background: white;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(31, 78, 47, 0.15);
+    transition: all 0.3s ease;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    transition: all 0.3s ease;
   }
 
-  .planta-card-mini:hover {
-    box-shadow: 0 8px 25px rgba(31, 78, 47, 0.3);
-    transform: translateY(-5px);
+  .card-planta:hover {
+    box-shadow: 0 10px 30px rgba(31, 78, 47, 0.25);
+    transform: translateY(-8px);
   }
 
-  .planta-header-mini {
-    text-align: center;
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
   }
 
-  .planta-nombre-mini {
-    margin: 0;
-    font-size: 1.3em;
+  .card-title {
+    font-size: 1.4em;
     font-weight: bold;
     color: #1f4e2f;
+    margin: 0;
   }
 
-  .planta-cientifico-mini {
-    margin: 5px 0 0 0;
-    color: #3d7f30;
+  .card-subtitle {
+    font-size: 0.9em;
     font-style: italic;
-    font-size: 0.85em;
+    color: #3d7f30;
+    margin: 0;
   }
 
-  .btn-detalles {
+  .card-text {
+    font-size: 0.95em;
+    color: #555;
+    margin: 10px 0;
+    flex-grow: 1;
+    line-height: 1.5;
+  }
+
+  .btn-link {
     display: inline-block;
-    width: 100%;
     background: #1f4e2f;
     color: white;
-    text-align: center;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 6px;
     text-decoration: none;
+    font-weight: bold;
     transition: all 0.3s ease;
-    font-size: 1em;
-    font-family: inherit;
+    font-size: 0.95em;
+    margin-top: auto;
   }
 
-  .btn-detalles:hover {
+  .btn-link:hover {
     background: #3d7f30;
+    color: white;
+    transform: translateX(5px);
+  }
+
+  /* ===== ALERTA ===== */
+  .alert-box {
+    background: linear-gradient(135deg, rgba(124, 179, 66, 0.1), rgba(31, 78, 47, 0.1));
+    border-left: 5px solid #1f4e2f;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .alert-box h5 {
+    color: #1f4e2f;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 0;
+  }
+
+  .alert-box p {
+    color: #1f4e2f;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ===== BOTONES ===== */
+  .btn-volver {
+    display: inline-block;
+    background: #1f4e2f;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-size: 1.1em;
+  }
+
+  .btn-volver:hover {
+    background: #3d7f30;
+    color: white;
     transform: scale(1.05);
   }
 
+  /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    .planta-card-mini {
+    .card-planta {
       padding: 15px;
     }
 
-    .btn-detalles {
-      padding: 10px;
+    .card-title {
+      font-size: 1.1em;
+    }
+
+    .card-text {
+      font-size: 0.85em;
+    }
+
+    .btn-link {
+      padding: 8px 15px;
+      font-size: 0.85em;
+    }
+
+    .alert-box {
+      padding: 15px;
     }
   }
 </style>
