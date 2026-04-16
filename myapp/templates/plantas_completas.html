@@ -33,12 +33,6 @@ Yo Chill{% endblock %} {% block content %}
     </h2>
     <div class="row g-4" id="plantas-grid">
       {% for planta in plantas %}
-      <input
-        type="checkbox"
-        id="modal-check-{{ forloop.counter0 }}"
-        class="modal-toggle"
-      />
-
       <!-- Tarjeta de Planta -->
       <div class="col-md-6 col-lg-4">
         <div class="planta-card-mini">
@@ -46,48 +40,12 @@ Yo Chill{% endblock %} {% block content %}
             <h4 class="planta-nombre-mini">{{ planta.nombre }}</h4>
             <p class="planta-cientifico-mini">{{ planta.cientifico }}</p>
           </div>
-          <label for="modal-check-{{ forloop.counter0 }}" class="btn-detalles"
-            >Ver Detalles</label
+          <a
+            href="{% url 'detalle-planta' id=forloop.counter0 %}"
+            class="btn-detalles"
           >
-        </div>
-      </div>
-
-      <!-- Modal Flotante -->
-      <div class="modal-flotante">
-        <div class="modal-contenido">
-          <!-- Botón cerrar -->
-          <label for="modal-check-{{ forloop.counter0 }}" class="modal-cerrar"
-            >&times;</label
-          >
-
-          <!-- Encabezado -->
-          <div class="planta-header">
-            <h3 class="planta-nombre">{{ planta.nombre }}</h3>
-            <p style="margin: 8px 0 0 0; color: white; font-style: italic">
-              {{ planta.cientifico }}
-            </p>
-          </div>
-
-          <!-- Contenido -->
-          <div class="apartado-box">
-            <h6>🔬 Definición Científica</h6>
-            <p class="apartado-texto">{{ planta.definicion }}</p>
-          </div>
-
-          <div class="apartado-box">
-            <h6>✨ Descripción</h6>
-            <p class="apartado-texto">{{ planta.descripcion }}</p>
-          </div>
-
-          <div class="apartado-box">
-            <h6>🌿 Uso Tradicional</h6>
-            <p class="apartado-texto">{{ planta.uso_tradicional }}</p>
-          </div>
-
-          <div class="apartado-box">
-            <h6>🏛️ Importancia Cultural</h6>
-            <p class="apartado-texto">{{ planta.importancia }}</p>
-          </div>
+            Ver Detalles →
+          </a>
         </div>
       </div>
       {% endfor %}
@@ -133,70 +91,15 @@ Yo Chill{% endblock %} {% block content %}
 </div>
 
 <style>
-  /* MODAL CON CHECKBOX (SIN JAVASCRIPT BLOQUEADO) */
-  input.modal-toggle {
-    display: none;
-  }
-
-  .modal-label {
-    cursor: pointer;
-  }
-
-  .modal-flotante {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-  }
-
-  input.modal-toggle:checked ~ .modal-flotante {
-    display: flex;
-  }
-
-  .modal-contenido {
-    background: white;
-    border-radius: 15px;
-    max-width: 600px;
-    width: 95%;
-    max-height: 85vh;
-    overflow-y: auto;
-    position: relative;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  }
-
-  .modal-cerrar {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #1f4e2f;
-    color: white;
-    border: none;
-    font-size: 28px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.2s ease;
-  }
-
-  .modal-cerrar:hover {
-    background: #7cb342;
-    transform: scale(1.1);
-  }
-
   /* TARJETAS */
   .planta-card-mini {
     background: white;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(31, 78, 47, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     transition: all 0.3s ease;
   }
 
@@ -224,16 +127,18 @@ Yo Chill{% endblock %} {% block content %}
   }
 
   .btn-detalles {
+    display: inline-block;
     width: 100%;
     background: #1f4e2f;
     color: white;
+    text-align: center;
     border: none;
     padding: 12px;
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.3s ease;
-    margin-top: 15px;
   }
 
   .btn-detalles:hover {
@@ -241,65 +146,15 @@ Yo Chill{% endblock %} {% block content %}
     transform: scale(1.05);
   }
 
-  /* CONTENIDO MODAL */
-  .planta-header {
-    background: linear-gradient(135deg, #1f4e2f, #3d7f30);
-    color: white;
-    padding: 30px;
-  }
-
-  .planta-nombre {
-    margin: 0;
-    font-size: 2em;
-    font-weight: bold;
-  }
-
-  .apartado-box {
-    padding: 20px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .apartado-box h6 {
-    color: #1f4e2f;
-    font-weight: bold;
-    margin: 0 0 10px 0;
-  }
-
-  .apartado-texto {
-    margin: 0;
-    line-height: 1.6;
-    color: #333;
-  }
-
   @media (max-width: 768px) {
-    .modal-contenido {
-      width: 98%;
-      max-height: 90vh;
+    .planta-card-mini {
+      padding: 15px;
     }
 
-    .planta-nombre {
-      font-size: 1.5em;
+    .btn-detalles {
+      padding: 10px;
     }
   }
 </style>
-
-<script>
-  // Cerrar modal al presionar Escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      document.querySelectorAll(".modal-toggle").forEach((check) => {
-        check.checked = false;
-      });
-    }
-  });
-
-  // Cerrar modal al hacer clic en el fondo
-  document.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modal-flotante")) {
-      const checkboxes = document.querySelectorAll(".modal-toggle:checked");
-      checkboxes.forEach((c) => (c.checked = false));
-    }
-  });
-</script>
 
 {% endblock %}

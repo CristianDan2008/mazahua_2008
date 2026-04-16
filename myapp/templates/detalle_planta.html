@@ -1,0 +1,223 @@
+{% extends 'base.html' %} {% load static %} {% block title %}{{ planta.nombre }}
+- Yo Chill{% endblock %} {% block content %}
+
+<!-- Hero Section -->
+<div class="hero-mazahua">
+  <div class="container">
+    <h1 class="hero-Title">🌿 {{ planta.nombre }} 🌿</h1>
+    <p class="hero-subtitle">{{ planta.cientifico }}</p>
+  </div>
+</div>
+
+<div class="container mt-5 mb-5">
+  <!-- Encabezado con información científica -->
+  <section class="detalle-header mb-5">
+    <div class="planta-header">
+      <h2 class="planta-nombre">{{ planta.nombre }}</h2>
+      <p class="planta-cientifico">{{ planta.cientifico }}</p>
+    </div>
+  </section>
+
+  <!-- Grid de información -->
+  <div class="row">
+    <div class="col-lg-8">
+      <!-- Definición Científica -->
+      <section class="mb-5">
+        <div class="apartado-box">
+          <h3 class="apartado-titulo">🔬 Definición Científica</h3>
+          <p class="apartado-texto">{{ planta.definicion }}</p>
+        </div>
+      </section>
+
+      <!-- Descripción -->
+      <section class="mb-5">
+        <div class="apartado-box">
+          <h3 class="apartado-titulo">✨ Descripción Detallada</h3>
+          <p class="apartado-texto">{{ planta.descripcion }}</p>
+        </div>
+      </section>
+
+      <!-- Uso Tradicional -->
+      <section class="mb-5">
+        <div class="apartado-box">
+          <h3 class="apartado-titulo">🌿 Ejemplo de Uso Tradicional</h3>
+          <p class="apartado-texto">{{ planta.uso_tradicional }}</p>
+        </div>
+      </section>
+
+      <!-- Importancia Cultural -->
+      <section class="mb-5">
+        <div class="apartado-box">
+          <h3 class="apartado-titulo">🏛️ Importancia Cultural</h3>
+          <p class="apartado-texto">{{ planta.importancia }}</p>
+        </div>
+      </section>
+
+      <!-- Advertencia -->
+      <section class="mb-5">
+        <div class="alert-warning">
+          <h5>⚠️ Importante - Consulta Profesional</h5>
+          <p>
+            Esta información es una guía educativa para honrar el conocimiento
+            tradicional. Consulta siempre con un profesional de salud
+            calificado antes de usar estas plantas, especialmente si tomas
+            medicamentos o tienes condiciones médicas.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sidebar con navegación -->
+    <div class="col-lg-4">
+      <div class="sidebar-box">
+        <h4 style="color: #1f4e2f; margin-bottom: 20px">📚 Navegación</h4>
+        <a
+          href="{% url 'plantas-completas' %}"
+          class="btn-volver"
+          style="display: block; margin-bottom: 10px"
+        >
+          ← Volver al Catálogo
+        </a>
+        <a
+          href="{% url 'inicio' %}"
+          class="btn-inicio"
+          style="display: block"
+        >
+          🏠 Ir al Inicio
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* HEADER DETALLE */
+  .detalle-header {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .planta-header {
+    background: linear-gradient(135deg, #1f4e2f, #3d7f30);
+    color: white;
+    padding: 40px;
+    text-align: center;
+  }
+
+  .planta-nombre {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .planta-cientifico {
+    margin: 10px 0 0 0;
+    font-style: italic;
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* APARTADOS */
+  .apartado-box {
+    background: white;
+    border-left: 5px solid #1f4e2f;
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(31, 78, 47, 0.1);
+  }
+
+  .apartado-titulo {
+    color: #1f4e2f;
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+  }
+
+  .apartado-texto {
+    line-height: 1.8;
+    color: #333;
+    font-size: 1em;
+    margin: 0;
+    text-align: justify;
+  }
+
+  /* ALERTA */
+  .alert-warning {
+    background: linear-gradient(135deg, rgba(124, 179, 66, 0.1), rgba(31, 78, 47, 0.1));
+    border-left: 4px solid #7cb342;
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .alert-warning h5 {
+    color: #1f4e2f;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .alert-warning p {
+    color: #1f4e2f;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* SIDEBAR */
+  .sidebar-box {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(31, 78, 47, 0.15);
+    position: sticky;
+    top: 20px;
+  }
+
+  .btn-volver,
+  .btn-inicio {
+    display: inline-block;
+    background: #1f4e2f;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .btn-volver:hover,
+  .btn-inicio:hover {
+    background: #3d7f30;
+    transform: translateX(-5px);
+  }
+
+  @media (max-width: 768px) {
+    .planta-nombre {
+      font-size: 1.8em;
+    }
+
+    .planta-header {
+      padding: 25px;
+    }
+
+    .apartado-box {
+      padding: 15px;
+    }
+
+    .apartado-titulo {
+      font-size: 1.1em;
+    }
+
+    .sidebar-box {
+      position: static;
+      margin-top: 20px;
+    }
+
+    .apartado-texto {
+      text-align: left;
+    }
+  }
+</style>
+
+{% endblock %}

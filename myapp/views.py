@@ -4,14 +4,9 @@ VIEWS - Vistas sin dependencia de base de datos
 from django.shortcuts import render
 
 
-def inicio(request):
-    """Página de inicio"""
-    return render(request, 'inicio.html')
-
-
-def plantas_completas(request):
-    """Página con todas las plantas medicinales"""
-    plantas = [
+def obtener_plantas():
+    """Retorna lista de todas las plantas medicinales"""
+    return [
         {
             'nombre': 'Romero',
             'cientifico': 'Rosmarinus officinalis',
@@ -237,4 +232,28 @@ def plantas_completas(request):
             'importancia': 'Considerada ancestralmente como la flor sagrada del descanso, armonía emocional y paz interior.',
         },
     ]
+
+
+def inicio(request):
+    """Página de inicio"""
+    return render(request, 'inicio.html')
+
+
+def plantas_completas(request):
+    """Página con todas las plantas medicinales"""
+    plantas = obtener_plantas()
     return render(request, 'plantas_completas.html', {'plantas': plantas})
+
+
+def detalle_planta(request, id):
+    """Página de detalles de una planta específica"""
+    plantas = obtener_plantas()
+    
+    # Validar que el ID sea válido
+    if id < 0 or id >= len(plantas):
+        return render(request, '404.html', status=404)
+    
+    planta = plantas[id]
+    planta['id'] = id
+    
+    return render(request, 'detalle_planta.html', {'planta': planta})

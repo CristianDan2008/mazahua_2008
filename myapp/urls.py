@@ -10,5 +10,7 @@ urlpatterns = [
     path('', views.inicio, name='inicio'),
     # galeria
     path('plantas/', views.plantas_completas, name='plantas-completas'),
+    # detalle de planta
+    path('plantas/<int:id>/', views.detalle_planta, name='detalle-planta'),
 ]
 
