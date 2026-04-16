@@ -1,32 +1,37 @@
-﻿{% extends 'base.html' %}
-{% load static %}
-
-{% block title %}Plantas Completas - Yo Chill{% endblock %}
-
-{% block content %}
+﻿{% extends 'base.html' %} {% load static %} {% block title %}Plantas Completas -
+Yo Chill{% endblock %} {% block content %}
 
 <!-- Hero Section -->
 <div class="hero-mazahua">
   <div class="container">
     <h1 class="hero-Title">🌱 Enciclopedia de Plantas 🌱</h1>
-    <p class="hero-subtitle">Descubre la sabiduría completa de cada planta sagrada</p>
+    <p class="hero-subtitle">
+      Descubre la sabiduría completa de cada planta sagrada
+    </p>
   </div>
 </div>
 
 <div class="container my-5">
   <!-- Introducción -->
   <section class="mb-5">
-    <h2 class="text-center mb-4">🌿 Conocimiento Profundo de Nuestras Plantas</h2>
-    <p class="text-center fs-5" style="color: #333; max-width: 800px; margin: 0 auto; line-height: 1.8;">
-      Cada planta medicinal contiene en sus hojas y raíces siglos de sabiduría ancestral. 
-      Aquí encontrarás información completa: definición científica, descripción, 
-      usos tradicionales e importancia cultural.
+    <h2 class="text-center mb-4">
+      🌿 Conocimiento Profundo de Nuestras Plantas
+    </h2>
+    <p
+      class="text-center fs-5"
+      style="color: #333; max-width: 800px; margin: 0 auto; line-height: 1.8"
+    >
+      Cada planta medicinal contiene en sus hojas y raíces siglos de sabiduría
+      ancestral. Aquí encontrarás información completa: definición científica,
+      descripción, usos tradicionales e importancia cultural.
     </p>
   </section>
 
   <!-- Grid de Plantas -->
   <section class="mb-5">
-    <h2 class="text-center mb-4" style="color: #1f4e2f;">🌸 Catálogo Completo</h2>
+    <h2 class="text-center mb-4" style="color: #1f4e2f">
+      🌸 Catálogo Completo
+    </h2>
     <div class="row g-4">
       {% for planta in plantas %}
       <div class="col-sm-6 col-lg-4">
@@ -35,9 +40,9 @@
             <h5 class="card-title">{{ planta.nombre }}</h5>
             <p class="card-subtitle">{{ planta.cientifico }}</p>
             <p class="card-text">{{ planta.definicion|truncatewords:15 }}</p>
-            <a href="/plantas/{{ forloop.counter0 }}/" class="btn-link">
+            <button onclick="location.href='/plantas/{{ forloop.counter0 }}/'" class="btn-link" style="width: 100%; border: none; cursor: pointer; font-family: inherit;">
               Ver Detalles →
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -50,9 +55,10 @@
     <div class="alert-box">
       <h5>⚠️ Importante - Consulta Profesional</h5>
       <p>
-        Esta enciclopedia es una guía informativa para honrar el conocimiento tradicional. 
-        Consulta siempre con un profesional de salud calificado antes de usar estas plantas, 
-        especialmente si tomas medicamentos o tienes condiciones médicas.
+        Esta enciclopedia es una guía informativa para honrar el conocimiento
+        tradicional. Consulta siempre con un profesional de salud calificado
+        antes de usar estas plantas, especialmente si tomas medicamentos o
+        tienes condiciones médicas.
       </p>
     </div>
   </section>
@@ -131,7 +137,11 @@
 
   /* ===== ALERTA ===== */
   .alert-box {
-    background: linear-gradient(135deg, rgba(124, 179, 66, 0.1), rgba(31, 78, 47, 0.1));
+    background: linear-gradient(
+      135deg,
+      rgba(124, 179, 66, 0.1),
+      rgba(31, 78, 47, 0.1)
+    );
     border-left: 5px solid #1f4e2f;
     padding: 25px;
     border-radius: 8px;
